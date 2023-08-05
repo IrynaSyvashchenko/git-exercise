@@ -49,3 +49,13 @@ h1, h2 {
   margin: 10px;
   padding-bottom: 20px;
 }
+
+button {
+  margin-right: auto;
+  margin-left: auto;
+  width: 30%;
+  background-color: black;
+  color: white;
+  border: 5px solid #56e2ff;
+  font-family: "Retro Gaming";
+}

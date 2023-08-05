@@ -1,29 +1,55 @@
 import React from "react";
+import { sortTable } from "./ArrayUtils";
+
+const TableOfScore = ({ allCountryScores, sort }) => {
+  const sortedCountryScores = allCountryScores.sort(function (a, b) {
+    let x = a.name.toLowerCase();
+    let y = b.name.toLowerCase();
+    if (x < y) {
+      return -1;
+    }
+    if (x > y) {
+      return 1;
+    }
+    return 0;
+  });
 
 
-const TableOfScore = ({allCountryScores}) => {
-    return (
-        <>
-{allCountryScores.map((element) => {
-    return(
-<div key={element.name} className="score-per-country">
-    <h2>HIGH SCORES: {element.name}</h2>
-<div className="table">
-    {element.scores.map((name) => {
+
+  return (
+    <>
+      {sortedCountryScores.map((element) => {
+        let sortedScore = null;
+
+        // if (sort) {
+        //   sortedScore = element.scores.sort(function (a, b) {
+        //     return b.s - a.s;
+        //   });
+        // } else {
+        //   sortedScore = element.scores.sort(function (a, b) {
+        //     return a.s - b.s;
+        //   });
+        // }
+        sortedScore = sortTable(element.scores, sort)
+
         return (
-            <div className="table-name" key={name.n}>
-            <div className="name">{name.n}</div>
-            <div className="score">{name.s}</div>
+          <div key={element.name} className="score-per-country">
+            <h2>HIGH SCORES: {element.name}</h2>
+            <div className="table">
+              {sortedScore.map((name) => {
+                return (
+                  <div className="table-name" key={name.n}>
+                    <div className="name">{name.n}</div>
+                    <div className="score">{name.s}</div>
+                  </div>
+                );
+              })}
             </div>
-        )
-    })}
-</div>
-</div>)
-})}
-</>
-    )
-}
+          </div>
+        );
+      })}
+    </>
+  );
+};
 
 export default TableOfScore;
-
-
